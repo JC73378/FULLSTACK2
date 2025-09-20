@@ -3,29 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jaxfreek Store - Funko Pop, Figuras y Posters</title>
+  <title>GeekStore - Funko Pop, Figuras y Posters</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="login.css"><!-- CSS del login -->
 </head>
 <body>
   <!-- HEADER -->
   <header>
     <div class="container header-container">
       <div class="logo">
-        <a href="index.html">Jaxfreek Store</a>
+        <a href="index.html">GeekStore</a>
       </div>
       <nav class="nav">
         <ul>
           <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#productos">Figuras</a></li>
+          <li><a href="productos.html">Figuras</a></li>
           <li><a href="#ofertas">Ofertas</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
       <div class="header-icons">
-        <a href="login.html" class="user-icon">👤</a>
-        <div class="cart">🛒 <span id="cart-count">0</span></div>
-      </div>
-    </div>
+  <a href="#" class="user-icon" id="userIcon">👤</a>
+  <span id="userName" style="color:#ff4081; font-weight:bold; display:none;"></span>
+  <div class="cart">🛒 <span id="cart-count">0</span></div>
+</div>
   </header>
 
   <!-- HERO -->
@@ -33,20 +34,13 @@
     <div class="hero-overlay">
       <h1>¡Colecciona tu mundo Geek!</h1>
       <p>Funkos, Figuras, Posters y mucho más</p>
-      <a href="#productos" class="btn">Ver Figuras</a>
     </div>
   </section>
 
-  <!-- PRODUCTOS DESTACADOS -->
+  <!-- PRODUCTOS -->
   <section id="productos" class="productos-section container">
     <h2>Figuras Destacadas</h2>
     <div class="products-grid" id="featured-products"></div>
-  </section>
-
-  <!-- OFERTAS -->
-  <section id="ofertas" class="ofertas-section container">
-    <h2>Ofertas Especiales</h2>
-    <div class="products-grid" id="offers-products"></div>
   </section>
 
   <!-- FOOTER -->
@@ -60,14 +54,14 @@
         <h3>Enlaces</h3>
         <ul>
           <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#productos">Figuras</a></li>
+          <li><a href="productos.html">Figuras</a></li>
           <li><a href="#ofertas">Ofertas</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </div>
       <div class="footer-section">
         <h3>Síguenos</h3>
-        <p>📸 <a href="#">Instagram</a> | 👍 <a href="#">Facebook</a></p>
+        <p>📸 <a href="https://www.instagram.com/geekstorejax?igsh=YzgwaXozNmM1ODBl" target="_blank">Instagram</a> | 👍 <a href="#">Facebook</a></p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -75,6 +69,39 @@
     </div>
   </footer>
 
+  <!-- MODAL DE LOGIN -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+
+      <div class="tabs">
+        <button id="loginTab" class="active">Iniciar Sesión</button>
+        <button id="registerTab">Registrarse</button>
+      </div>
+
+      <!-- Formulario Login -->
+      <form id="loginForm" class="form active">
+        <h2>Iniciar Sesión</h2>
+        <input type="email" placeholder="Correo electrónico" required>
+        <input type="password" placeholder="Contraseña" required>
+        <button type="submit">Ingresar</button>
+      </form>
+
+      <!-- Formulario Registro -->
+      <form id="registerForm" class="form">
+        <h2>Crear Cuenta</h2>
+        <input type="text" placeholder="Nombre completo" required>
+        <input type="text" placeholder="RUT" required>
+        <input type="tel" placeholder="Teléfono" required>
+        <input type="email" placeholder="Correo electrónico" required>
+        <input type="password" placeholder="Contraseña" required>
+        <button type="submit">Registrarse</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JS -->
   <script src="app.js"></script>
+  <script src="login.js"></script>
 </body>
 </html>

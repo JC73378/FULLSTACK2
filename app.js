@@ -54,9 +54,11 @@ productos.slice(0, 2).forEach(prod => {
 });
 
 // Carrito
-let carrito = [];
-function agregarAlCarrito(id) {
-  const producto = productos.find(p => p.id === id);
-  carrito.push(producto);
-  document.getElementById("cart-count").innerText = carrito.length;
-}
+let cartCount = 0;
+
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('add-to-cart')) {
+    cartCount++;
+    document.getElementById('cart-count').textContent = cartCount;
+  }
+});

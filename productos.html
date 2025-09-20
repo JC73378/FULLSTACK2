@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeekStore - Catálogo de Figuras</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <a href="index.html">GeekStore</a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html" class="active">Figuras</a></li>
+          <li><a href="#ofertas">Ofertas</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="header-icons">
+        <a href="#" class="user-icon">👤</a>
+        <div class="cart">🛒 <span id="cart-count">0</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CATÁLOGO -->
+  <section class="productos-section container">
+    <h2>Catálogo Completo</h2>
+
+    <!-- Filtros -->
+    <div class="filtros">
+      <button onclick="filtrarProductos('Todos')">Todos</button>
+      <button onclick="filtrarProductos('Funko')">Funkos</button>
+      <button onclick="filtrarProductos('Figura')">Figuras</button>
+      <button onclick="filtrarProductos('Poster')">Posters</button>
+    </div>
+
+    <!-- Grid de productos -->
+    <div class="products-grid" id="catalogo-productos"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>GeekStore</h3>
+        <p>La tienda geek para coleccionistas: funkos, figuras, posters y más.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Figuras</a></li>
+          <li><a href="#ofertas">Ofertas</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Síguenos</h3>
+        <p>📸 <a href="#">Instagram</a> | 👍 <a href="#">Facebook</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 GeekStore. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script src="productos.js"></script>
+</body>
+</html>

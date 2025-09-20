@@ -98,3 +98,25 @@ footer { background: #1c1c1c; color: #ccc; padding: 2.5rem 1rem; margin-top: 3re
   .hero { height: 300px; }
   .hero h1 { font-size: 2rem; }
 }
+/* --- FILTROS EN FIGURAS --- */
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filtros button {
+  background: #2c2c2c;
+  color: #eee;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filtros button:hover {
+  background: #ff4081;
+  color: #fff;
+}
