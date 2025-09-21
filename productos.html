@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GeekStore - Catálogo de Figuras</title>
+  <title>GeekStore - Productos</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="productos.css">
 </head>
 <body>
-  <!-- HEADER -->
+  <!-- HEADER UNIFICADO -->
   <header>
     <div class="container header-container">
       <div class="logo">
@@ -15,34 +16,44 @@
       </div>
       <nav class="nav">
         <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="productos.html" class="active">Figuras</a></li>
-          <li><a href="#ofertas">Ofertas</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="index.html#inicio">Inicio</a></li>
+          <li><a href="productos.html" class="active">Productos</a></li>
+          <li><a href="index.html#ofertas">Ofertas</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
         </ul>
       </nav>
       <div class="header-icons">
-        <a href="#" class="user-icon">👤</a>
+        <a href="#" class="user-icon" id="userIcon">👤</a>
+        <span id="userName" style="color:#ff4081; font-weight:bold; display:none;"></span>
         <div class="cart">🛒 <span id="cart-count">0</span></div>
       </div>
     </div>
   </header>
 
-  <!-- CATÁLOGO -->
-  <section class="productos-section container">
-    <h2>Catálogo Completo</h2>
+  <!-- CATÁLOGO DE PRODUCTOS -->
+<main class="catalogo-section">
+  <div class="container">
+    <h1>Catálogo Completo</h1>
+    <p>Explora todas nuestras figuras, posters y coleccionables geek.</p>
 
-    <!-- Filtros -->
-    <div class="filtros">
-      <button onclick="filtrarProductos('Todos')">Todos</button>
-      <button onclick="filtrarProductos('Funko')">Funkos</button>
-      <button onclick="filtrarProductos('Figura')">Figuras</button>
-      <button onclick="filtrarProductos('Poster')">Posters</button>
-    </div>
+    <!-- Aquí se inyectan los productos -->
+    <div id="catalogo-productos" class="products-grid"></div>
+    <section id="catalogo" class="productos-section container">
+  <h2>Catálogo</h2>
 
-    <!-- Grid de productos -->
-    <div class="products-grid" id="catalogo-productos"></div>
-  </section>
+  <!-- BOTONES DE FILTRO -->
+  <div class="filtros">
+    <button onclick="filtrarProductos('Funko')">Funkos</button>
+    <button onclick="filtrarProductos('Mascara')">Máscaras</button>
+    <button onclick="filtrarProductos('Poster')">Posters</button>
+    <button onclick="filtrarProductos('Figura')">Figuras</button>
+    <button onclick="mostrarTodos()">Todos</button>
+  </div>
+
+  <div class="products-grid" id="catalogo-products"></div>
+</section>
+  </div>
+</main>
 
   <!-- FOOTER -->
   <footer>
@@ -54,15 +65,15 @@
       <div class="footer-section">
         <h3>Enlaces</h3>
         <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="productos.html">Figuras</a></li>
-          <li><a href="#ofertas">Ofertas</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="index.html#inicio">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="index.html#ofertas">Ofertas</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
         </ul>
       </div>
       <div class="footer-section">
         <h3>Síguenos</h3>
-        <p>📸 <a href="#">Instagram</a> | 👍 <a href="#">Facebook</a></p>
+        <p>📸 <a href="https://www.instagram.com/geekstorejax" target="_blank">Instagram</a> | 👍 <a href="#">Facebook</a></p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -70,7 +81,9 @@
     </div>
   </footer>
 
-  <!-- SCRIPT -->
+  <!-- JS -->
+  <script src="productosData.js"></script>
   <script src="productos.js"></script>
+  <script src="cart.js"></script><script src="app.js"></script>
 </body>
 </html>

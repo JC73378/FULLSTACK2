@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GeekStore - Funko Pop, Figuras y Posters</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="login.css"><!-- CSS del login -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login.css" />
 </head>
 <body>
   <!-- HEADER -->
@@ -17,16 +17,18 @@
       <nav class="nav">
         <ul>
           <li><a href="#inicio">Inicio</a></li>
-          <li><a href="productos.html">Figuras</a></li>
+          <li><a href="productos.html">Productos</a></li>
           <li><a href="#ofertas">Ofertas</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
       <div class="header-icons">
-  <a href="#" class="user-icon" id="userIcon">👤</a>
-  <span id="userName" style="color:#ff4081; font-weight:bold; display:none;"></span>
-  <div class="cart">🛒 <span id="cart-count">0</span></div>
-</div>
+        <a href="#" class="user-icon" id="userIcon">👤</a>
+        <span id="userName" style="color:#ff4081; font-weight:bold; display:none;"></span>
+        <!-- Cambié el id por class para poder actualizar en varios lugares -->
+        <div class="cart">🛒 <span class="cart-count">0</span></div>
+      </div>
+    </div>
   </header>
 
   <!-- HERO -->
@@ -37,18 +39,20 @@
     </div>
   </section>
 
-  <!-- PRODUCTOS -->
-  <section id="productos" class="productos-section container">
-    <h2>Figuras Destacadas</h2>
-    <div class="products-grid" id="featured-products"></div>
-  </section>
-
+<!-- PRODUCTOS DESTACADOS -->
+<section id="productos" class="productos-section container">
+  <h2 class="titulo-destacadas">Figuras Destacadas</h2>
+  <div class="destacadas-container" id="featured-products"></div>
+</section>
+  
   <!-- FOOTER -->
   <footer>
     <div class="container footer-content">
       <div class="footer-section">
         <h3>GeekStore</h3>
         <p>La tienda geek para coleccionistas: funkos, figuras, posters y más.</p>
+        <!-- Ejemplo si quieres mostrar contador también en el footer -->
+        <div class="cart-footer">🛒 <span class="cart-count">0</span></div>
       </div>
       <div class="footer-section">
         <h3>Enlaces</h3>
@@ -69,7 +73,7 @@
     </div>
   </footer>
 
-  <!-- MODAL DE LOGIN -->
+  <!-- MODAL LOGIN -->
   <div id="loginModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="closeModal">&times;</span>
@@ -79,29 +83,28 @@
         <button id="registerTab">Registrarse</button>
       </div>
 
-      <!-- Formulario Login -->
       <form id="loginForm" class="form active">
         <h2>Iniciar Sesión</h2>
-        <input type="email" placeholder="Correo electrónico" required>
-        <input type="password" placeholder="Contraseña" required>
+        <input type="email" placeholder="Correo electrónico" required />
+        <input type="password" placeholder="Contraseña" required />
         <button type="submit">Ingresar</button>
       </form>
 
-      <!-- Formulario Registro -->
       <form id="registerForm" class="form">
         <h2>Crear Cuenta</h2>
-        <input type="text" placeholder="Nombre completo" required>
-        <input type="text" placeholder="RUT" required>
-        <input type="tel" placeholder="Teléfono" required>
-        <input type="email" placeholder="Correo electrónico" required>
-        <input type="password" placeholder="Contraseña" required>
+        <input type="text" placeholder="Nombre completo" required />
+        <input type="text" placeholder="RUT" required />
+        <input type="tel" placeholder="Teléfono" required />
+        <input type="email" placeholder="Correo electrónico" required />
+        <input type="password" placeholder="Contraseña" required />
         <button type="submit">Registrarse</button>
       </form>
     </div>
   </div>
 
-  <!-- JS -->
-  <script src="app.js"></script>
+  <!-- SCRIPTS: primero productosData, luego app.js para que pueda usar productos -->
+  <script src="productosData.js"></script>
+  <script src="cart.js"></script><script src="app.js"></script>
   <script src="login.js"></script>
 </body>
 </html>

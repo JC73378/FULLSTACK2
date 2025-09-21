@@ -1,0 +1,62 @@
+.btn-group-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Espacio razonable entre los botones */
+  margin-top: 10px;
+  width: fit-content;
+}
+.catalogo-section {
+  padding-top: 60px; /* Ajusta según necesidad */
+}
+
+.catalogo-section .container {
+  text-align: center;
+}
+
+.catalogo-section h1,
+.catalogo-section p {
+  margin: 0 auto;
+}
+
+.catalogo-section p {
+  margin-bottom: 40px; /* Espacio hacia los productos */
+}
+
+
+.btn-agregar,
+.btn-detalle {
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 130px; /* ancho fijo para uniformidad */
+  text-align: center;
+}
+
+.btn-agregar {
+  background-color: #e91e63; /* rosa */
+}
+
+.btn-agregar:hover {
+  background-color: #c2185b; /* rosa oscuro */
+}
+
+.btn-detalle {
+  background-color: #4b0082; /* morado oscuro */
+}
+
+.btn-detalle:hover {
+  background-color: #36006b; /* morado aún más oscuro */
+}
+
+.btn-group-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; 
+  margin-top: 10px;
+  width: fit-content;
+  margin: 0 auto; /* ¡Añadido para centrar! */
+}

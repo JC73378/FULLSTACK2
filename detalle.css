@@ -1,0 +1,195 @@
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #121212;
+  color: #eee;
+  min-height: 100vh;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* HEADER */
+header {
+  background: #1c1c1c;
+  border-bottom: 1px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo a {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff4081;
+  text-decoration: none;
+}
+
+.nav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #eee;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: #ff4081;
+}
+
+.header-icons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
+.user-icon, .cart {
+  color: #eee;
+  cursor: pointer;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+
+.user-icon:hover, .cart:hover {
+  color: #ff4081;
+}
+
+/* DETALLE DEL PRODUCTO */
+.detalle-container {
+  margin: 50px auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.detalle-card {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  background: #2c2c2c;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  color: #eee;
+  max-width: 900px;
+  width: 100%;
+}
+
+.detalle-card img {
+  max-width: 300px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.detalle-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.detalle-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #ff4081;
+}
+
+.detalle-info p {
+  margin: 8px 0;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.detalle-precio {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ff4081;
+  margin: 15px 0;
+}
+
+/* Cantidad */
+.cantidad-container {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cantidad-container label {
+  font-size: 1rem;
+  color: #eee;
+}
+
+.cantidad-container input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+}
+
+/* Botones */
+.detalle-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.detalle-buttons button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn-carrito {
+  background: #ff4081;
+  color: #fff;
+}
+
+.btn-volver {
+  background: #444;
+  color: #eee;
+}
+
+.detalle-buttons button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .detalle-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .detalle-card img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .detalle-info {
+    width: 100%;
+  }
+}
