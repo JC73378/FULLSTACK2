@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,9 +7,9 @@
   <title>GeekStore - Funko Pop, Figuras y Posters</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="contacto.css" /> 
 </head>
 <body>
-  <!-- HEADER -->
   <header>
     <div class="container header-container">
       <div class="logo">
@@ -18,20 +19,18 @@
         <ul>
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="productos.html">Productos</a></li>
-          <li><a href="#ofertas">Ofertas</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="Blogs.html">Blogs</a></li>
+          <li><a href="#contacto" id="contactoLink">Contactanos</a></li>
         </ul>
       </nav>
       <div class="header-icons">
         <a href="#" class="user-icon" id="userIcon">👤</a>
         <span id="userName" style="color:#ff4081; font-weight:bold; display:none;"></span>
-        <!-- Cambié el id por class para poder actualizar en varios lugares -->
         <div class="cart">🛒 <span class="cart-count">0</span></div>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
   <section id="inicio" class="hero">
     <div class="hero-overlay">
       <h1>¡Colecciona tu mundo Geek!</h1>
@@ -39,28 +38,24 @@
     </div>
   </section>
 
-<!-- PRODUCTOS DESTACADOS -->
-<section id="productos" class="productos-section container">
-  <h2 class="titulo-destacadas">Figuras Destacadas</h2>
-  <div class="destacadas-container" id="featured-products"></div>
-</section>
+  <section id="productos" class="productos-section container">
+    <h2 class="titulo-destacadas">Figuras Destacadas</h2>
+    <div class="destacadas-container" id="featured-products"></div>
+  </section>
   
-  <!-- FOOTER -->
   <footer>
     <div class="container footer-content">
       <div class="footer-section">
         <h3>GeekStore</h3>
         <p>La tienda geek para coleccionistas: funkos, figuras, posters y más.</p>
-        <!-- Ejemplo si quieres mostrar contador también en el footer -->
-        <div class="cart-footer">🛒 <span class="cart-count">0</span></div>
       </div>
       <div class="footer-section">
         <h3>Enlaces</h3>
         <ul>
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="productos.html">Figuras</a></li>
-          <li><a href="#ofertas">Ofertas</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="#contacto">Contactanos</a></li>
         </ul>
       </div>
       <div class="footer-section">
@@ -73,23 +68,19 @@
     </div>
   </footer>
 
-  <!-- MODAL LOGIN -->
   <div id="loginModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" id="closeModal">&times;</span>
-
       <div class="tabs">
         <button id="loginTab" class="active">Iniciar Sesión</button>
         <button id="registerTab">Registrarse</button>
       </div>
-
       <form id="loginForm" class="form active">
         <h2>Iniciar Sesión</h2>
         <input type="email" placeholder="Correo electrónico" required />
         <input type="password" placeholder="Contraseña" required />
         <button type="submit">Ingresar</button>
       </form>
-
       <form id="registerForm" class="form">
         <h2>Crear Cuenta</h2>
         <input type="text" placeholder="Nombre completo" required />
@@ -102,9 +93,33 @@
     </div>
   </div>
 
-  <!-- SCRIPTS: primero productosData, luego app.js para que pueda usar productos -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" id="closeContactModal">&times;</span>
+        <h2>Contáctanos 📬</h2>
+        <form id="contactForm">
+            <label for="fullName">Nombre Completo:</label>
+            <input type="text" id="fullName" name="fullName" required>
+
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="subject">Asunto:</label>
+            <input type="text" id="subject" name="subject" required>
+
+            <label for="message">Mensaje:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit">Enviar Mensaje</button>
+        </form>
+    </div>
+  </div>
+
   <script src="productosData.js"></script>
-  <script src="cart.js"></script><script src="app.js"></script>
+  <script src="cart.js"></script>
+  <script src="app.js"></script>
   <script src="login.js"></script>
+  <script src="contacto.js"></script>
+  
 </body>
 </html>

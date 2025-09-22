@@ -46,3 +46,5 @@ function renderizarProductosDestacados() {
 document.addEventListener("DOMContentLoaded", () => {
   renderizarProductosDestacados();
 });
+
+

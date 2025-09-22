@@ -1,0 +1,87 @@
+/* ========================================
+ Estilos para el Modal de Contacto
+========================================
+*/
+
+/* --- Ajuste de Tamaño General --- */
+#contactModal .modal-content {
+  max-width: 320px; /* Ancho máximo reducido drásticamente */
+  padding: 1.5rem;  /* Menos relleno interno */
+}
+
+/* --- Contenedor y Botón de Cerrar --- */
+#contactModal .close-button {
+  color: #aaa;
+  position: absolute;
+  top: 8px;   /* Más cerca de la esquina */
+  right: 15px;
+  font-size: 26px; /* Ligeramente más pequeño */
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+#contactModal .close-button:hover,
+#contactModal .close-button:focus {
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* --- Estilos del Formulario Compacto --- */
+
+/* Título "Contáctanos" */
+#contactModal h2 {
+  margin-top: 0;
+  margin-bottom: 15px; /* Menos espacio debajo */
+  text-align: center;
+  font-size: 1.3rem;   /* Título más pequeño */
+  color: #333;
+}
+
+/* El formulario en sí */
+#contactForm {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Etiquetas (Nombre, Correo, etc.) */
+#contactForm label {
+  text-align: left;
+  margin-top: 10px; /* Menos espacio entre campos */
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 0.9rem; /* Texto de la etiqueta más pequeño */
+  color: #444;
+}
+
+/* Campos de texto y área de mensaje */
+#contactForm input,
+#contactForm textarea {
+  width: 100%;
+  padding: 10px; /* Menos relleno en los campos */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 0.9rem; /* Texto dentro de los campos más pequeño */
+  font-family: inherit;
+}
+
+/* Botón de "Enviar Mensaje" */
+#contactForm button {
+  width: 100%;
+  padding: 10px; /* Botón menos alto */
+  margin-top: 20px;
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem; /* Texto del botón más pequeño */
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Efecto al pasar el mouse sobre el botón */
+#contactForm button:hover {
+  background-color: #e02f69;
+}

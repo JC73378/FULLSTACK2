@@ -1,107 +1,101 @@
-// Elementos del modal
-const modal = document.getElementById("loginModal");
-const closeModal = document.getElementById("closeModal");
-const userIcon = document.getElementById("userIcon");
-const userNameSpan = document.getElementById("userName");
+// Contenido completo para tu archivo login.js
 
-const loginTab = document.getElementById("loginTab");
-const registerTab = document.getElementById("registerTab");
-const loginForm = document.getElementById("loginForm");
-const registerForm = document.getElementById("registerForm");
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Elementos del DOM ---
+    const modal = document.getElementById("loginModal");
+    const userIcon = document.getElementById("userIcon");
+    const closeModal = document.getElementById("closeModal");
+    const userNameSpan = document.getElementById("userName");
 
-// Abrir modal al hacer clic en el ícono de usuario (solo si no está logueado)
-userIcon.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (!localStorage.getItem("usuario")) {
-    modal.style.display = "flex";
-  }
-});
+    const loginTab = document.getElementById("loginTab");
+    const registerTab = document.getElementById("registerTab");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
 
-// Cerrar modal
-closeModal.addEventListener("click", () => {
-  modal.style.display = "none";
-});
+    // --- Lógica del Modal ---
 
-// Cambiar entre login y registro
-loginTab.addEventListener("click", () => {
-  loginTab.classList.add("active");
-  registerTab.classList.remove("active");
-  loginForm.classList.add("active");
-  registerForm.classList.remove("active");
-});
+    // Abrir modal al hacer clic en el ícono de usuario (solo si no está logueado)
+    userIcon.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (!localStorage.getItem("usuario")) {
+            // CORRECCIÓN: Usamos classList para mostrar el modal
+            modal.classList.add("is-visible");
+        }
+    });
 
-registerTab.addEventListener("click", () => {
-  registerTab.classList.add("active");
-  loginTab.classList.remove("active");
-  registerForm.classList.add("active");
-  loginForm.classList.remove("active");
-});
+    // Función para cerrar el modal
+    function cerrarModal() {
+        // CORRECCIÓN: Usamos classList para ocultar el modal
+        modal.classList.remove("is-visible");
+    }
 
-// Cerrar modal al hacer clic fuera del contenido
-window.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.style.display = "none";
-  }
-});
+    // Eventos para cerrar el modal
+    closeModal.addEventListener("click", cerrarModal);
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            cerrarModal();
+        }
+    });
 
-// ------------------------- //
-//     SIMULACIÓN LOGIN      //
-// ------------------------- //
+    // --- Lógica de Pestañas (Tabs) ---
 
-// LOGIN
-loginForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const email = loginForm.querySelector("input[type='email']").value;
-  const password = loginForm.querySelector("input[type='password']").value;
+    loginTab.addEventListener("click", () => {
+        loginTab.classList.add("active");
+        registerTab.classList.remove("active");
+        loginForm.classList.add("active");
+        registerForm.classList.remove("active");
+    });
 
-  if (email && password) {
-    // Simulamos login
-    const nombre = email.split("@")[0]; // Usa lo que va antes del @ como nombre
-    localStorage.setItem("usuario", nombre);
-    mostrarUsuario(nombre);
-    modal.style.display = "none";
-  } else {
-    alert("Debes ingresar tus credenciales.");
-  }
-});
+    registerTab.addEventListener("click", () => {
+        registerTab.classList.add("active");
+        loginTab.classList.remove("active");
+        registerForm.classList.add("active");
+        loginForm.classList.remove("active");
+    });
 
-// REGISTRO
-registerForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const nombre = registerForm.querySelector("input[type='text']").value;
-  const email = registerForm.querySelector("input[type='email']").value;
-  const password = registerForm.querySelector("input[type='password']").value;
+    // --- Simulación de Login y Registro ---
 
-  if (nombre && email && password) {
-    localStorage.setItem("usuario", nombre);
-    mostrarUsuario(nombre);
-    modal.style.display = "none";
-  } else {
-    alert("Completa todos los campos.");
-  }
-});
+    // LOGIN
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = loginForm.querySelector("input[type='email']").value;
+        const nombre = email.split("@")[0]; 
+        
+        localStorage.setItem("usuario", nombre);
+        mostrarUsuario(nombre);
+        cerrarModal();
+    });
 
-// Mostrar usuario logueado
-function mostrarUsuario(nombre) {
-  userIcon.style.display = "none";
-  userNameSpan.style.display = "inline";
-  userNameSpan.textContent = `👋 ${nombre}`;
-}
+    // REGISTRO
+    registerForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const nombre = registerForm.querySelector("input[type='text']").value;
 
-// Cerrar sesión (si clickea el nombre)
-userNameSpan.addEventListener("click", () => {
-  const confirmar = confirm("¿Cerrar sesión?");
-  if (confirmar) {
-    localStorage.removeItem("usuario");
-    userIcon.style.display = "inline";
-    userNameSpan.style.display = "none";
-  }
-});
+        localStorage.setItem("usuario", nombre);
+        mostrarUsuario(nombre);
+        cerrarModal();
+    });
 
-// Comprobar si ya hay usuario al cargar
-window.addEventListener("DOMContentLoaded", () => {
-  const usuario = localStorage.getItem("usuario");
-  if (usuario) {
-    mostrarUsuario(usuario);
-  }
+    // --- Funciones de Usuario ---
+
+    function mostrarUsuario(nombre) {
+        userIcon.style.display = "none";
+        userNameSpan.style.display = "inline";
+        userNameSpan.textContent = `👋 ${nombre}`;
+    }
+
+    // Cerrar sesión
+    userNameSpan.addEventListener("click", () => {
+        if (confirm("¿Cerrar sesión?")) {
+            localStorage.removeItem("usuario");
+            userIcon.style.display = "inline";
+            userNameSpan.style.display = "none";
+        }
+    });
+
+    // Comprobar si ya hay usuario al cargar la página
+    const usuarioGuardado = localStorage.getItem("usuario");
+    if (usuarioGuardado) {
+        mostrarUsuario(usuarioGuardado);
+    }
 });

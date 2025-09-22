@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - GeekStore</title>
+  
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="contacto.css" />
+  <link rel="stylesheet" href="blogs.css" /> 
+</head>
+<body>
+
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <a href="index.html">GeekStore</a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="#" id="contactoLink">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="header-icons">
+        <a href="#" class="user-icon" id="userIcon">👤</a>
+        <span id="userName" style="color:#ff4081; font-weight:bold; display:none;"></span>
+        <div class="cart">🛒 <span class="cart-count">0</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="Blogs" class="blogs-section container">
+      <h2 class="titulo-destacadas">Nuestro Blog</h2>
+      <p class="subtitulo-blogs">Noticias, reseñas y novedades del universo Geek.</p>
+
+      <div class="blog-posts-container">
+        
+        <article class="blog-post-card">
+          <div class="card-image">
+            <a href="#">
+              <img src="https://i.pinimg.com/1200x/08/10/53/08105315e870b66582bd90df33a378d8.jpg" alt="Nuevos Funkos anunciados">
+            </a>
+          </div>
+          <div class="card-content">
+            <span class="card-category">Novedades</span>
+            <h3><a href="#">Los Funkos más esperados para finales de 2025</a></h3>
+            <p>Un vistazo exclusivo a las figuras que romperán el mercado. Desde Marvel hasta los clásicos del anime, te contamos todo.</p>
+            <a href="https://hotstuff4geeks.com/get-ready-for-the-2025-funko-pop-line-up-early-sneak-peek-inside"class="read-more">Leer Más →</a>
+          </div>
+        </article>
+
+        <article class="blog-post-card">
+          <div class="card-image">
+            <a href="#">
+              <img src="https://i.pinimg.com/736x/16/de/d1/16ded160f74e9983411aefd95d9c00c3.jpg" alt="Guía para enmarcar posters">
+            </a>
+          </div>
+          <div class="card-content">
+            <span class="card-category">Guías</span>
+            <h3><a href="#">Cómo cuidar y enmarcar tus posters de colección</a></h3>
+            <p>Sigue estos sencillos pasos para que tu arte geek dure para siempre y luzca genial en cualquier pared de tu casa.</p>
+            <a href="https://www.lafabricadelcuadro.com/blog/guias-y-consejos-de-enmarcacion/como-enmarcar-un-poster-paso-a-paso-sin-danarlo?srsltid=AfmBOopybUJYupnVJljUu4UGeOWx5zoINURYwVzbUvNTCBIo1cT5gX2M" class="read-more">Leer Más →</a>
+          </div>
+        </article>
+
+        <article class="blog-post-card">
+          <div class="card-image">
+            <a href="#">
+              <img src="https://i.pinimg.com/1200x/0f/20/9c/0f209c09a2fbb01b5d6ace36203f091a.jpg" alt="Reseña de figura de acción">
+            </a>
+          </div>
+          <div class="card-content">
+            <span class="card-category">Reseñas</span>
+            <h3><a href="#">Analizamos la nueva figura de acción de Spider-Man</a></h3>
+            <p>La última figura articulada de Hot Toys ya está aquí. ¿Vale la pena? Te damos nuestro veredicto detallado sobre sus pros y contras.</p>
+            <a href="https://www.youtube.com/watch?v=C96Wn5qva8k" class="read-more">Mira este analisis→</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>GeekStore</h3>
+        <p>La tienda geek para coleccionistas: funkos, figuras, posters y más.</p>
+        <div class="cart-footer">🛒 <span class="cart-count">0</span></div>
+      </div>
+      <div class="footer-section">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Figuras</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Síguenos</h3>
+        <p>📸 <a href="https://www.instagram.com/geekstorejax?igsh=YzgwaXozNmM1ODBl" target="_blank">Instagram</a> | 👍 <a href="#">Facebook</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 GeekStore. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <div id="loginModal" class="modal"> </div>
+  <div id="contactModal" class="modal"> </div>
+
+  <script src="login.js"></script>
+  <script src="contact.js"></script>
+
+</body>
+</html>

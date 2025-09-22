@@ -1,34 +1,44 @@
-// Contenedor donde se mostrarán los productos
-const catalogoContainer = document.getElementById("catalogo-products");
+// productos.js
 
-// Función para mostrar todos los productos
-function mostrarTodos() {
-  renderizarCatalogo(productos);
-}
+const catalogoContainer = document.getElementById("catalogo-productos");
 
-// Función para filtrar por categoría
-function filtrarProductos(categoria) {
-  const filtrados = productos.filter(p => p.categoria === categoria);
-  renderizarCatalogo(filtrados);
-}
-
-// Función de renderizado (reutilizable)
-function renderizarCatalogo(lista) {
-  if (!catalogoContainer) return; // seguridad por si no existe el contenedor
+// Función para renderizar productos en catálogo
+function renderProductos(lista) {
   catalogoContainer.innerHTML = "";
-
-  lista.forEach(p => {
+  lista.forEach(prod => {
     const card = document.createElement("div");
-    card.className = "product-card";
+    card.classList.add("product-card");
+
     card.innerHTML = `
-      <img src="${p.imagen}" alt="${p.nombre}">
-      <h3>${p.nombre}</h3>
-      <p>$${p.precio}</p>
-      <button onclick='agregarAlCarrito(${JSON.stringify(p)}, 1)'>Agregar al carrito</button>
+      <img src="${prod.imagen}" alt="${prod.nombre}" />
+      <h3>${prod.nombre}</h3>
+      <p class="categoria">${prod.categoria}</p>
+      <p class="precio">$${prod.precio.toLocaleString()}</p>
+      <div class="btn-group-vertical">
+        <button class="btn-detalle" onclick="window.location.href='detalle.html?id=${prod.id}'">🔍 Ver Detalle</button>
+      </div>
     `;
     catalogoContainer.appendChild(card);
   });
 }
 
-// Cuando se cargue la página, mostrar todos los productos
-document.addEventListener("DOMContentLoaded", mostrarTodos);
+// Filtro básico
+function filtrarProductos(categoria) {
+  if (categoria === "Todos") {
+    renderProductos(productos);
+  } else {
+    const filtrados = productos.filter(p => p.categoria === categoria);
+    renderProductos(filtrados);
+  }
+}
+
+// Al cargar la página mostramos todos los productos
+document.addEventListener("DOMContentLoaded", () => {
+  renderProductos(productos);
+});
+
+// Agrega esta función a tu archivo productos.js
+function mostrarTodos() {
+  renderProductos(productos); // Llama a tu función principal con la lista completa
+}
+

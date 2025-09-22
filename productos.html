@@ -18,8 +18,8 @@
         <ul>
           <li><a href="index.html#inicio">Inicio</a></li>
           <li><a href="productos.html" class="active">Productos</a></li>
-          <li><a href="index.html#ofertas">Ofertas</a></li>
-          <li><a href="index.html#contacto">Contacto</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="index.html#contacto">Contactanos</a></li>
         </ul>
       </nav>
       <div class="header-icons">
@@ -34,24 +34,18 @@
 <main class="catalogo-section">
   <div class="container">
     <h1>Catálogo Completo</h1>
-    <p>Explora todas nuestras figuras, posters y coleccionables geek.</p>
+    <p>Explora todas nuestras figuras y coleccionables Geek</p>
 
-    <!-- Aquí se inyectan los productos -->
-    <div id="catalogo-productos" class="products-grid"></div>
-    <section id="catalogo" class="productos-section container">
-  <h2>Catálogo</h2>
+    <div class="filtros">
+      <button onclick="filtrarProductos('Funko')">Funkos</button>
+      <button onclick="filtrarProductos('Mascara')">Máscaras</button>
+      <button onclick="filtrarProductos('Poster')">Posters</button>
+      <button onclick="filtrarProductos('Figura')">Figuras</button>
+      <button onclick="filtrarProductos('Todos')">Todos</button>
+    </div>
 
-  <!-- BOTONES DE FILTRO -->
-  <div class="filtros">
-    <button onclick="filtrarProductos('Funko')">Funkos</button>
-    <button onclick="filtrarProductos('Mascara')">Máscaras</button>
-    <button onclick="filtrarProductos('Poster')">Posters</button>
-    <button onclick="filtrarProductos('Figura')">Figuras</button>
-    <button onclick="mostrarTodos()">Todos</button>
-  </div>
-
-  <div class="products-grid" id="catalogo-products"></div>
-</section>
+    <div id="catalogo-productos" class="products-grid">
+        </div>
   </div>
 </main>
 
@@ -67,8 +61,8 @@
         <ul>
           <li><a href="index.html#inicio">Inicio</a></li>
           <li><a href="productos.html">Productos</a></li>
-          <li><a href="index.html#ofertas">Ofertas</a></li>
-          <li><a href="index.html#contacto">Contacto</a></li>
+          <li><a href="index.html#Blogs">Blogs</a></li>
+          <li><a href="index.html#contacto">Contactanos</a></li>
         </ul>
       </div>
       <div class="footer-section">

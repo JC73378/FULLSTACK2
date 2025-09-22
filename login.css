@@ -1,6 +1,8 @@
-/* MODAL */
+/* --- Reemplaza tu antigua regla .modal por estas dos --- */
+
+/* ESTADO POR DEFECTO (OCULTO) */
 .modal {
-  display: none;
+  display: none; /* Ahora solo se encarga de ocultarlo */
   position: fixed;
   z-index: 200;
   left: 0;
@@ -8,6 +10,11 @@
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.7);
+}
+
+/* ESTADO VISIBLE (CUANDO JS AÑADA ESTA CLASE) */
+.modal.is-visible {
+  display: flex; /* Lo muestra como un contenedor flex */
   justify-content: center;
   align-items: center;
 }

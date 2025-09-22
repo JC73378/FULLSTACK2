@@ -1,0 +1,107 @@
+CSS
+
+/* ========================================
+   Estilos para la Página de Blogs
+======================================== */
+
+/* Contenedor principal de la sección de blogs */
+.blogs-section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  text-align: center; /* Centra el título y subtítulo */
+}
+
+/* Subtítulo debajo del título principal */
+.subtitulo-blogs {
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+  color: #666;
+  font-size: 1.1rem;
+  text-align: center; /* <-- AÑADE ESTA LÍNEA */
+}
+
+/* Contenedor de todas las tarjetas de blog */
+/* Contenedor de todas las tarjetas de blog */
+.blog-posts-container {
+  display: grid;
+  /* Aumentamos el tamaño mínimo de la tarjeta a 350px */
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+/* Estilo individual para cada tarjeta de blog */
+.blog-post-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center; /* <-- ASÍ QUEDA CORREGIDO */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Efecto al pasar el mouse sobre la tarjeta */
+.blog-post-card:hover {
+  transform: translateY(-10px); /* Eleva la tarjeta ligeramente */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+}
+
+/* Imagen de la tarjeta */
+.blog-post-card .card-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* Hace que la imagen cubra el espacio sin deformarse */
+  display: block;
+}
+
+/* Contenido de texto de la tarjeta */
+.blog-post-card .card-content {
+  padding: 1.5rem;
+}
+
+/* Etiqueta de categoría (Novedades, Guías, etc.) */
+.blog-post-card .card-category {
+  display: inline-block;
+  background-color: #ffebf1;
+  color: #ff4081;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Título del post */
+.blog-post-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.blog-post-card h3 a {
+  text-decoration: none;
+  color: #1c1c1c;
+  transition: color 0.3s;
+}
+
+.blog-post-card h3 a:hover {
+  color: #ff4081;
+}
+
+/* Párrafo de descripción del post */
+.blog-post-card p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Enlace "Leer Más" */
+.blog-post-card .read-more {
+  text-decoration: none;
+  color: #ff4081;
+  font-weight: 700;
+  transition: color 0.3s;
+}
+
+.blog-post-card .read-more:hover {
+  text-decoration: underline;
+}
