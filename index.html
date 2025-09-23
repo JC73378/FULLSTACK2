@@ -1,0 +1,57 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin • Panel</title>
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="aside">
+      <div class="brand">GeekStore • Admin</div>
+      <nav>
+        <ul class="menu">
+          <li><a href="./index.html" class="active">Dashboard</a></li>
+          <li><a href="./productos.html">Productos</a></li>
+          <li><a href="./usuarios.html" data-role-visible="Administrador">Usuarios</a></li>
+          <li><a href="#" id="logoutBtn">Cerrar sesión</a></li>
+        </ul>
+      </nav>
+      <div class="muted" style="font-size:.9rem">Los elementos con <code>data-role-visible="Administrador"</code> se ocultan para Vendedor.</div>
+    </aside>
+
+    <div>
+      <header class="header">
+        <div class="space">
+          <div class="badge">Panel de administración</div>
+        </div>
+        <div class="right">
+          <span class="tag" data-user>-</span>
+        </div>
+      </header>
+
+      <main class="main">
+        <div class="grid three">
+          <div class="card"><h2>Productos</h2><p class="muted">Administra catálogo, stock y categorías.</p><p><a class="btn ghost" href="./productos.html">Ir a Productos</a></p></div>
+          <div class="card"><h2>Usuarios</h2><p class="muted">Crea y gestiona perfiles y roles.</p><p><a class="btn ghost" href="./usuarios.html">Ir a Usuarios</a></p></div>
+          <div class="card"><h2>Sesión</h2><p class="muted">Cierra sesión y vuelve al login.</p><p><button class="btn danger" id="logoutBtn2">Cerrar sesión</button></p></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="./admin.bundle.js"></script>
+  <script>
+    Admin.requireAuth(); // cualquier rol
+    const s = Admin.getSession();
+    if (s?.rol === "Vendedor"){
+      document.querySelectorAll('[data-role-visible="Administrador"]').forEach(el => el.style.display="none");
+    }
+    const logout = ()=>{ Admin.clearSession(); location.href="./login.html"; };
+    document.getElementById("logoutBtn").addEventListener("click", (e)=>{e.preventDefault();logout();});
+    document.getElementById("logoutBtn2").addEventListener("click", logout);
+  </script>
+</body>
+</html>

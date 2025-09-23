@@ -1,0 +1,273 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin • Usuarios</title>
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="aside">
+      <div class="brand">GeekStore • Admin</div>
+      <nav>
+        <ul class="menu">
+          <li><a href="./index.html">Dashboard</a></li>
+          <li><a href="./productos.html">Productos</a></li>
+          <li><a href="./usuarios.html" class="active" data-role-visible="Administrador">Usuarios</a></li>
+          <li><a href="#" id="logoutBtn">Cerrar sesión</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <div>
+      <header class="header">
+        <div class="space">
+          <input class="search" id="q" type="search" placeholder="Buscar por RUN o nombre">
+          <button class="btn ghost" id="clear">Limpiar</button>
+        </div>
+        <div class="right"><span class="tag" data-user>-</span></div>
+      </header>
+
+      <main class="main">
+        <div class="grid two">
+          <div class="card">
+            <h2>Nuevo / Editar usuario</h2>
+            <form id="userForm" class="form" novalidate>
+              <input type="hidden" id="id">
+              <div class="row">
+                <div>
+                  <label for="run">RUN *</label>
+                  <input id="run" placeholder="Ej: 19011022K" required>
+                  <small class="error" id="e_run"></small>
+                </div>
+                <div>
+                  <label for="correo">Correo *</label>
+                  <input id="correo" type="email" placeholder="usuario@duoc.cl" required>
+                  <small class="error" id="e_correo"></small>
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label for="nombre">Nombre *</label>
+                  <input id="nombre" required>
+                  <small class="error" id="e_nombre"></small>
+                </div>
+                <div>
+                  <label for="apellidos">Apellidos *</label>
+                  <input id="apellidos" required>
+                  <small class="error" id="e_apellidos"></small>
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label for="fechaNacimiento">Fecha nacimiento</label>
+                  <input id="fechaNacimiento" type="date">
+                </div>
+                <div>
+                  <label for="tipo">Tipo de usuario *</label>
+                  <select id="tipo" required>
+                    <option value="">Seleccione</option>
+                    <option>Administrador</option>
+                    <option>Cliente</option>
+                    <option>Vendedor</option>
+                  </select>
+                  <small class="error" id="e_tipo"></small>
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label for="region">Región *</label>
+                  <select id="region" required></select>
+                  <small class="error" id="e_region"></small>
+                </div>
+                <div>
+                  <label for="comuna">Comuna *</label>
+                  <select id="comuna" required></select>
+                  <small class="error" id="e_comuna"></small>
+                </div>
+              </div>
+              <div>
+                <label for="direccion">Dirección *</label>
+                <textarea id="direccion" maxlength="300" required></textarea>
+                <small class="error" id="e_direccion"></small>
+              </div>
+
+              <div class="space">
+                <button class="btn" type="submit">Guardar</button>
+                <button class="btn secondary" type="button" id="resetBtn">Reset</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>Listado</h2>
+            <div class="space" style="margin:.5rem 0 1rem">
+              <button class="btn ghost" id="exportBtn">Exportar JSON</button>
+              <label class="btn secondary" for="importFile" style="cursor:pointer">Importar JSON</label>
+              <input id="importFile" type="file" accept="application/json" style="display:none">
+            </div>
+            <table class="table" id="tabla">
+              <thead>
+                <tr>
+                  <th>RUN</th><th>Nombre</th><th>Correo</th><th>Tipo</th><th>Región</th><th>Comuna</th><th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="./admin.bundle.js"></script>
+  <script>
+  (function(){
+    Admin.requireAuth(['Administrador']);
+    const s = Admin.getSession();
+    const badge = document.querySelector('[data-user]'); if (badge) badge.textContent = `${s.usuario} • ${s.rol}`;
+
+    const KEY = 'admin_users';
+    let data = Admin.loadLS(KEY, []);
+    let editingId = null;
+
+    const q = document.getElementById('q');
+    const clearBtn = document.getElementById('clear');
+    const tbody = document.querySelector('#tabla tbody');
+    const form = document.getElementById('userForm');
+    const resetBtn = document.getElementById('resetBtn');
+    const regionSel = document.getElementById('region');
+    const comunaSel = document.getElementById('comuna');
+
+    const logout = (e) => { if(e) e.preventDefault(); Admin.clearSession(); location.href='./login.html'; };
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+
+    function fillRegiones(){
+      regionSel.innerHTML = '<option value="">Seleccione</option>' + Admin.REGIONES.map(r => `<option>${r.nombre}</option>`).join('');
+      comunaSel.innerHTML = '<option value="">Seleccione</option>';
+    }
+    function fillComunas(regionNombre){
+      const r = Admin.REGIONES.find(x => x.nombre === regionNombre);
+      comunaSel.innerHTML = '<option value="">Seleccione</option>' + (r ? r.comunas.map(c => `<option>${c}</option>`).join('') : '');
+    }
+    regionSel.addEventListener('change', ()=> fillComunas(regionSel.value));
+    fillRegiones();
+
+    function render(list){
+      list = list || data;
+      tbody.innerHTML = '';
+      list.forEach(u => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${u.run}</td>
+          <td>${u.nombre} ${u.apellidos}</td>
+          <td>${u.correo}</td>
+          <td><span class="chip">${u.tipo}</span></td>
+          <td>${u.region}</td>
+          <td>${u.comuna}</td>
+          <td class="flex">
+            <button class="btn ghost" data-edit="${u.id}">Editar</button>
+            <button class="btn danger" data-del="${u.id}">Eliminar</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+    render();
+
+    function getFormValues(){
+      return {
+        id: editingId || Admin.uid(),
+        run: form.run.value.trim().toUpperCase(),
+        correo: form.correo.value.trim(),
+        nombre: form.nombre.value.trim(),
+        apellidos: form.apellidos.value.trim(),
+        fechaNacimiento: form.fechaNacimiento.value || null,
+        tipo: form.tipo.value,
+        region: form.region.value,
+        comuna: form.comuna.value,
+        direccion: form.direccion.value.trim()
+      };
+    }
+    function setErrors(errors){
+      ['run','correo','nombre','apellidos','tipo','region','comuna','direccion'].forEach(k => {
+        const el = document.getElementById('e_'+k);
+        el.textContent = errors[k] || '';
+      });
+    }
+
+    form.addEventListener('submit', (ev)=>{
+      ev.preventDefault();
+      const payload = getFormValues();
+      const errors = Admin.validateUser(payload);
+      setErrors(errors);
+      if (Object.keys(errors).length) return;
+      const idx = data.findIndex(x => x.id === payload.id);
+      if (idx >= 0) data[idx] = payload; else data.push(payload);
+      Admin.saveLS(KEY, data);
+      render();
+      form.reset();
+      editingId = null;
+      fillRegiones();
+    });
+
+    resetBtn.addEventListener('click', ()=>{ form.reset(); editingId = null; setErrors({}); fillRegiones(); });
+
+    tbody.addEventListener('click', (ev)=>{
+      const id = ev.target.dataset.edit || ev.target.dataset.del;
+      if(!id) return;
+      if (ev.target.dataset.edit){
+        const u = data.find(x => x.id === id);
+        if (!u) return;
+        editingId = u.id;
+        form.run.value = u.run;
+        form.correo.value = u.correo;
+        form.nombre.value = u.nombre;
+        form.apellidos.value = u.apellidos;
+        form.fechaNacimiento.value = u.fechaNacimiento || '';
+        form.tipo.value = u.tipo;
+        form.direccion.value = u.direccion;
+        fillRegiones();
+        form.region.value = u.region;
+        fillComunas(u.region);
+        form.comuna.value = u.comuna;
+        setErrors({});
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (ev.target.dataset.del){
+        if (confirm('¿Eliminar usuario?')){
+          data = data.filter(x => x.id !== id);
+          Admin.saveLS(KEY, data);
+          render();
+        }
+      }
+    });
+
+    q.addEventListener('input', ()=>{
+      const term = q.value.trim().toLowerCase();
+      if (!term){ render(); return; }
+      render(data.filter(u => u.run.toLowerCase().includes(term) || (u.nombre + ' ' + u.apellidos).toLowerCase().includes(term)));
+    });
+    clearBtn.addEventListener('click', ()=>{ q.value=''; render(); });
+
+    // Export / Import
+    document.getElementById('exportBtn').addEventListener('click', ()=>{
+      Admin.exportJSON('usuarios.json', data);
+    });
+    document.getElementById('importFile').addEventListener('change', (e)=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      Admin.importJSON(file, (err, json)=>{
+        if(err){ alert('JSON inválido'); return; }
+        if(!Array.isArray(json)){ alert('El archivo debe ser un arreglo de usuarios'); return; }
+        data = json;
+        Admin.saveLS(KEY, data);
+        render();
+        e.target.value = '';
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
