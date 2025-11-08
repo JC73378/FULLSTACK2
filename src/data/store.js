@@ -1,4 +1,4 @@
-// Catalogo base
+// Catalogo base de productos rederizados
 export const products = [
   { id: 1,  name: 'Homer Donut (Underwear)',  price: 24.99,  category: 'Limited Edition • The Simpsons', onSale: true,  img: 'assets/homer-donut.png',        stock: 18 },
   { id: 2,  name: 'Kuromi Bow (Supreme)',     price: 19.99,  category: 'Limited Edition • Sanrio',       onSale: true,  img: 'assets/kuromi-bow.jpg',        stock: 6  },
