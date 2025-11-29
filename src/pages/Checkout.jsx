@@ -6,7 +6,7 @@ import { useCart } from '../context/CartContext.jsx'
 export default function Checkout(){
   const nav = useNavigate()
   const { user } = useAuth()
-  const { cart, clear } = useCart()
+  const { cart, checkoutCart } = useCart()
 
   const [form, setForm] = useState({
     nombre: user?.name || '',
@@ -14,15 +14,28 @@ export default function Checkout(){
     direccion: '',
   })
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const onChange = e=> setForm({...form, [e.target.name]: e.target.value})
-  const onSubmit = e=>{
+  const onSubmit = async e=>{
     e.preventDefault()
     setSubmitted(true)
-    if(form.nombre && form.email && form.direccion && cart.length>0){
-      clear()
+    setError(null)
+    if(!(form.nombre && form.email && form.direccion && cart.length>0)){
+      nav('/resultado/error')
+      return
+    }
+    try{
+      setLoading(true)
+      await checkoutCart(1) // userId demo
+      setLoading(false)
       nav('/resultado/ok')
-    }else{
+    }catch(err){
+      console.error(err)
+      setLoading(false)
+      const msg = err?.response?.data?.message || err?.message || 'No se pudo procesar el pedido.'
+      setError(msg)
       nav('/resultado/error')
     }
   }
@@ -43,11 +56,12 @@ export default function Checkout(){
             <div className="invalid-feedback">Requerido</div>
           </div>
           <div className="mb-3">
-            <label className="form-label">Dirección</label>
+            <label className="form-label">Direccion</label>
             <input name="direccion" className={"form-control"+(submitted && !form.direccion ? " is-invalid": "")} value={form.direccion} onChange={onChange}/>
             <div className="invalid-feedback">Requerido</div>
           </div>
-          <button className="btn btn-primary">Pagar</button>
+          {error && <div className="alert alert-danger py-2">{error}</div>}
+          <button className="btn btn-primary" disabled={loading}>{loading ? 'Procesando...' : 'Pagar'}</button>
         </form>
       </div>
     </div>

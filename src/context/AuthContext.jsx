@@ -11,17 +11,17 @@ export function AuthProvider({children}){
     else sessionStorage.removeItem('user')
   }, [user])
 
+  // Login local sin JWT: guarda el usuario si hay email y password
   const login = (email, password)=>{
-    // Simple demo login; replace with real validation if needed
     if(email && password){
-      setUser({name: email.split('@')[0], email})
+      setUser({ name: email.split('@')[0], email })
       return true
     }
     return false
   }
   const logout = ()=> setUser(null)
 
-  return <AuthCtx.Provider value={{user, login, logout, setUser}}>{children}</AuthCtx.Provider>
+  return <AuthCtx.Provider value={{user, login, logout}}>{children}</AuthCtx.Provider>
 }
 
 export const useAuth = ()=> useContext(AuthCtx)
