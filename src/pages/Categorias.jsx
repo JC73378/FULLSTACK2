@@ -1,9 +1,25 @@
-import React from 'react'
-import { loadProducts } from '../data/store'
+import React, { useEffect, useMemo, useState } from 'react'
+import { productApi } from '../api/client.js'
 
 export default function Categorias(){
-  const list = loadProducts()
-  const cats = [...new Set(list.map(p=>p.category))]
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(()=> {
+    let alive = true
+    productApi.list()
+      .then(data => { if (alive) setProducts(data) })
+      .catch(err => { if (alive) setError(err.message || 'No se pudieron cargar las categorias') })
+      .finally(() => { if (alive) setLoading(false) })
+    return () => { alive = false }
+  }, [])
+
+  const cats = useMemo(() => [...new Set(products.map(p=>p.category))], [products])
+
+  if (loading) return <p>Cargando categorias...</p>
+  if (error) return <div className="alert alert-danger">{error}</div>
+
   return (
     <div className="row">
       {cats.map(c=>(

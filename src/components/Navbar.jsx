@@ -32,16 +32,18 @@ export default function Navbar() {
               <NavLink className="nav-link" to="/productos">Funkos</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/categorias">Categorías</NavLink>
+              <NavLink className="nav-link" to="/categorias">Categorias</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/ofertas">Ofertas</NavLink>
             </li>
+            {user && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/admin">Admin</NavLink>
+              </li>
+            )}
             <li className="nav-item">
-              <NavLink className="nav-link" to="/admin">Admin</NavLink>
-            </li>
-                      <li className="nav-item">
-              <NavLink className="nav-link" to="/coming-soon">Coming&nbsp;Soon</NavLink>
+              <NavLink className="nav-link" to="/coming-soon">Coming Soon</NavLink>
             </li>
           </ul>
 
@@ -74,11 +76,8 @@ export default function Navbar() {
             )}
             <li className="nav-item ms-3">
               <NavLink className="btn btn-warning fw-bold" to="/carrito">
-                🛒 Carrito ({count})
+                Carrito ({count})
               </NavLink>
-            </li>
-                      <li className="nav-item">
-              <NavLink className="nav-link" to="/coming-soon">Coming&nbsp;Soon</NavLink>
             </li>
           </ul>
         </div>
@@ -86,5 +85,3 @@ export default function Navbar() {
     </nav>
   )
 }
-
-

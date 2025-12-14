@@ -1,6 +1,6 @@
-# GeekStore React
+# FunkoStore React
 
-Proyecto React listo según pauta: vistas, navegación, carrito, checkout con validación, admin con CRUD en memoria y persistencia en localStorage, y Bootstrap integrado.
+Frontend React (Vite) que consume el backend Spring Boot ubicado en `backend/`. Incluye vistas publicas, carrito, checkout, coming soon, autenticacion basica y panel admin.
 
 ## Requisitos
 - Node 18+
@@ -10,24 +10,18 @@ Proyecto React listo según pauta: vistas, navegación, carrito, checkout con va
 npm install
 npm run dev
 ```
+Variables utiles (crear `.env` si es necesario):
+```
+VITE_API_URL=http://localhost:8080/api
+```
 
-## Rutas principales
-- `/` Home
-- `/productos` listado con tarjetas
-- `/categorias` categorías desde los productos
-- `/ofertas` solo onSale
-- `/carrito` tabla + total + limpiar
-- `/checkout` formulario validado y redirección a OK/Error
-- `/login` y `/register`
-- `/admin` CRUD productos
+## Funciones principales
+- `/productos`, `/categorias`, `/ofertas`, `/coming-soon` leen datos desde el backend mediante `src/api/client.js`.
+- `/carrito` y `/checkout` usan `CartContext`; el checkout envia la orden con `POST /api/orders`.
+- `/login` y `/register` consumen `/api/auth/*` via `AuthContext`.
+- `/admin` realiza CRUD con `/api/products`.
 
-## Datos
-- `src/data/store.js` contiene productos y funciones CRUD con persistencia en `localStorage`.
-- Imágenes encontradas fusionadas en `src/assets/`: sin imágenes detectadas en los ZIP o nombres no detectados.
-
-## Bootstrap
-Ya importado en `src/main.jsx`. Aplica clases utilitarias para estilizar.
-
-## Siguiente
-- Ajustar contenido y estilos con Bootstrap según rúbrica del profe.
-- Si piden pruebas unitarias: agregar Karma+Jasmine y specs en `src/**/*.spec.jsx`.
+## Notas
+- Bootstrap ya esta importado en `src/main.jsx`.
+- Las suscripciones de Coming Soon se guardan en `localStorage` (solo para avisos).
+- Ver `backend/README.md` para levantar la API y ejecutar pruebas (`mvn test`).

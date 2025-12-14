@@ -1,27 +1,33 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
+import { authApi, setAccessToken } from '../api/client.js'
 
 const AuthCtx = createContext()
 
 export function AuthProvider({children}){
-  const [user, setUser] = useState(()=>{
-    try { return JSON.parse(sessionStorage.getItem('user')) || null } catch { return null }
+  const [auth, setAuth] = useState(()=>{
+    try { return JSON.parse(sessionStorage.getItem('auth')) || { user: null, token: null } } catch { return { user: null, token: null } }
   })
+
   useEffect(()=>{
-    if(user) sessionStorage.setItem('user', JSON.stringify(user))
-    else sessionStorage.removeItem('user')
-  }, [user])
+    sessionStorage.setItem('auth', JSON.stringify(auth))
+    setAccessToken(auth.token)
+  }, [auth])
 
-  // Login local sin JWT: guarda el usuario si hay email y password
-  const login = (email, password)=>{
-    if(email && password){
-      setUser({ name: email.split('@')[0], email })
-      return true
-    }
-    return false
+  const login = async (email, password)=>{
+    const data = await authApi.login({email, password})
+    setAuth({
+      user: { id: data.userId, name: data.name, email: data.email },
+      token: data.token
+    })
+    return data
   }
-  const logout = ()=> setUser(null)
+  const register = async (payload)=>{
+    const data = await authApi.register(payload)
+    return data
+  }
+  const logout = ()=> setAuth({ user: null, token: null })
 
-  return <AuthCtx.Provider value={{user, login, logout}}>{children}</AuthCtx.Provider>
+  return <AuthCtx.Provider value={{user: auth.user, token: auth.token, login, logout, register}}>{children}</AuthCtx.Provider>
 }
 
 export const useAuth = ()=> useContext(AuthCtx)

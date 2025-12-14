@@ -8,7 +8,7 @@ export default function Carrito(){
 
   if(cart.length===0){
     return <div className="text-center">
-      <p>Tu carrito está vacío.</p>
+      <p>Tu carrito esta vacio.</p>
       <Link to="/productos" className="btn btn-primary">Ir a productos</Link>
     </div>
   }
